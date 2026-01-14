@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Text?>
+
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="controller.TicTacToeController"
+          alignment="CENTER"
+          hgap="10"
+          vgap="10">
+
+    <Text fx:id="statusText" text="Tura: X" GridPane.columnSpan="3" />
+
+    <Button fx:id="b00" onAction="#handleMove" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Button fx:id="b01" onAction="#handleMove" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Button fx:id="b02" onAction="#handleMove" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
+    <Button fx:id="b10" onAction="#handleMove" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <Button fx:id="b11" onAction="#handleMove" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <Button fx:id="b12" onAction="#handleMove" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+
+    <Button fx:id="b20" onAction="#handleMove" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <Button fx:id="b21" onAction="#handleMove" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <Button fx:id="b22" onAction="#handleMove" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+
+    <Button text="Reset" onAction="#resetGame"
+            GridPane.rowIndex="4" GridPane.columnSpan="3"/>
+
+</GridPane>

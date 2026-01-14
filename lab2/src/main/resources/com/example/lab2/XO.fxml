@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER"
+      spacing="10"
+      prefHeight="400.0"
+      prefWidth="400.0"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.lab2.GameBoardController">
+
+    <children>
+
+        <!-- Opis aktualnej tury -->
+        <Label fx:id="turnLabel"
+               text="Ruch gracza X"
+               style="-fx-font-size:16px;-fx-font-weight:bold;" />
+
+        <!-- Plansza gry -->
+        <GridPane fx:id="gameGrid"
+                  alignment="CENTER"
+                  hgap="6"
+                  vgap="6">
+
+            <columnConstraints>
+                <ColumnConstraints prefWidth="120"/>
+                <ColumnConstraints prefWidth="120"/>
+                <ColumnConstraints prefWidth="120"/>
+            </columnConstraints>
+
+            <rowConstraints>
+                <RowConstraints prefHeight="70"/>
+                <RowConstraints prefHeight="70"/>
+                <RowConstraints prefHeight="70"/>
+            </rowConstraints>
+
+            <children>
+                <Button fx:id="b0" onAction="#GameButtonClicked"
+                        style="-fx-font-size:22px;-fx-font-weight:bold;-fx-border-width:3;"/>
+                <Button fx:id="b1" onAction="#GameButtonClicked" GridPane.columnIndex="1"
+                        style="-fx-font-size:22px;-fx-font-weight:bold;-fx-border-width:3;"/>
+                <Button fx:id="b2" onAction="#GameButtonClicked" GridPane.columnIndex="2"
+                        style="-fx-font-size:22px;-fx-font-weight:bold;-fx-border-width:3;"/>
+
+                <Button fx:id="b3" onAction="#GameButtonClicked" GridPane.rowIndex="1"
+                        style="-fx-font-size:22px;-fx-font-weight:bold;-fx-border-width:3;"/>
+                <Button fx:id="b4" onAction="#GameButtonClicked" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                        style="-fx-font-size:22px;-fx-font-weight:bold;-fx-border-width:3;"/>
+                <Button fx:id="b5" onAction="#GameButtonClicked" GridPane.columnIndex="2" GridPane.rowIndex="1"
+                        style="-fx-font-size:22px;-fx-font-weight:bold;-fx-border-width:3;"/>
+
+                <Button fx:id="b6" onAction="#GameButtonClicked" GridPane.rowIndex="2"
+                        style="-fx-font-size:22px;-fx-font-weight:bold;-fx-border-width:3;"/>
+                <Button fx:id="b7" onAction="#GameButtonClicked" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                        style="-fx-font-size:22px;-fx-font-weight:bold;-fx-border-width:3;"/>
+                <Button fx:id="b8" onAction="#GameButtonClicked" GridPane.columnIndex="2" GridPane.rowIndex="2"
+                        style="-fx-font-size:22px;-fx-font-weight:bold;-fx-border-width:3;"/>
+            </children>
+        </GridPane>
+
+        <!-- Przycisk restartu -->
+        <Button fx:id="restart"
+                text="Nowa gra"
+                disable="true"
+                onAction="#OnRestartClicked"
+                style="-fx-font-size:14px;-fx-font-weight:bold;"/>
+
+    </children>
+</VBox>

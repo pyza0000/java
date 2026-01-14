@@ -1,0 +1,18 @@
+package com.example.lab7;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class HelloApplication extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("interface.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setTitle("Pacjenci");
+        stage.setScene(scene);
+        stage.show();
+    }
+}

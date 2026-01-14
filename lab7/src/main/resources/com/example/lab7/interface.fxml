@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.lab7.PacjentController">
+
+    <TextField fx:id="imieField" promptText="Imię"/>
+    <TextField fx:id="nazwiskoField" promptText="Nazwisko"/>
+
+    <Spinner fx:id="wiekSpinner">
+        <valueFactory>
+            <SpinnerValueFactory.IntegerSpinnerValueFactory min="0" max="130" initialValue="20"/>
+        </valueFactory>
+    </Spinner>
+
+    <ChoiceBox fx:id="sortChoice"/>
+
+    <HBox spacing="10">
+        <Button text="Dodaj" onAction="#dodaj"/>
+        <Button text="Drukuj JSON" onAction="#drukuj"/>
+    </HBox>
+
+</VBox>
