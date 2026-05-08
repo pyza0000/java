@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
+
+    <children>
+
+        <Label layoutX="27.0" layoutY="35.0" text="Your Answer:" />
+
+        <TextField fx:id="answerField" layoutX="125.0" layoutY="39.0" prefWidth="200.0" />
+        <Button
+                fx:id="sendButton" layoutX="96.0" layoutY="80.0" prefHeight="120.0" prefWidth="270.0" text="Send Answer&gt;&gt;" onAction="#handleSendAnswer" />
+
+        <Label layoutX="35.0" layoutY="219.0" text="Your Nick:" />
+
+        <TextField fx:id="nickField" layoutX="125.0" layoutY="215.0" prefWidth="200.0" />
+
+    </children>
+</AnchorPane>

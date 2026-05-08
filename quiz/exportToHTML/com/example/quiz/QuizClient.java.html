@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>QuizClient.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+QuizClient.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">quiz</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">PrintWriter</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">net</span><span class="s2">.</span><span class="s1">Socket</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">charset</span><span class="s2">.</span><span class="s1">StandardCharsets</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">QuizClient </span><span class="s0">extends </span><span class="s1">JFrame </span><span class="s2">{</span>
+    <span class="s0">private static final </span><span class="s1">String SERVER_IP </span><span class="s2">= </span><span class="s3">&quot;127.0.0.1&quot;</span><span class="s2">;</span>
+    <span class="s0">private static final int </span><span class="s1">SERVER_PORT </span><span class="s2">= </span><span class="s4">5000</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">JTextField nickField</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JTextField answerField</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JButton sendButton</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">QuizClient</span><span class="s2">() {</span>
+        <span class="s5">// Konfiguracja okna (Swing)</span>
+        <span class="s1">setTitle</span><span class="s2">(</span><span class="s3">&quot;CLIENT&quot;</span><span class="s2">);</span>
+        <span class="s1">setSize</span><span class="s2">(</span><span class="s4">350</span><span class="s2">, </span><span class="s4">250</span><span class="s2">);</span>
+        <span class="s1">setDefaultCloseOperation</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">EXIT_ON_CLOSE</span><span class="s2">);</span>
+        <span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">BorderLayout</span><span class="s2">());</span>
+
+        <span class="s5">// Panel formularza</span>
+        <span class="s1">JPanel mainPanel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">();</span>
+        <span class="s1">mainPanel</span><span class="s2">.</span><span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">GridBagLayout</span><span class="s2">());</span>
+        <span class="s1">GridBagConstraints gbc </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GridBagConstraints</span><span class="s2">();</span>
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">insets </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Insets</span><span class="s2">(</span><span class="s4">10</span><span class="s2">, </span><span class="s4">10</span><span class="s2">, </span><span class="s4">10</span><span class="s2">, </span><span class="s4">10</span><span class="s2">);</span>
+
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridy </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s1">mainPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Your Answer:&quot;</span><span class="s2">), </span><span class="s1">gbc</span><span class="s2">);</span>
+
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s4">1</span><span class="s2">; </span><span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridy </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s1">answerField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">(</span><span class="s4">15</span><span class="s2">);</span>
+        <span class="s1">mainPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">answerField</span><span class="s2">, </span><span class="s1">gbc</span><span class="s2">);</span>
+
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridy </span><span class="s2">= </span><span class="s4">1</span><span class="s2">; </span><span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridwidth </span><span class="s2">= </span><span class="s4">2</span><span class="s2">;</span>
+        <span class="s1">sendButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Send Answer&gt;&gt;&quot;</span><span class="s2">);</span>
+        <span class="s1">sendButton</span><span class="s2">.</span><span class="s1">setPreferredSize</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s4">200</span><span class="s2">, </span><span class="s4">50</span><span class="s2">));</span>
+        <span class="s1">mainPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">sendButton</span><span class="s2">, </span><span class="s1">gbc</span><span class="s2">);</span>
+
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridy </span><span class="s2">= </span><span class="s4">2</span><span class="s2">; </span><span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridwidth </span><span class="s2">= </span><span class="s4">1</span><span class="s2">;</span>
+        <span class="s1">mainPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Your Nick:&quot;</span><span class="s2">), </span><span class="s1">gbc</span><span class="s2">);</span>
+
+        <span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridx </span><span class="s2">= </span><span class="s4">1</span><span class="s2">; </span><span class="s1">gbc</span><span class="s2">.</span><span class="s1">gridy </span><span class="s2">= </span><span class="s4">2</span><span class="s2">;</span>
+        <span class="s1">nickField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">(</span><span class="s4">10</span><span class="s2">);</span>
+        <span class="s1">mainPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">nickField</span><span class="s2">, </span><span class="s1">gbc</span><span class="s2">);</span>
+
+        <span class="s1">add</span><span class="s2">(</span><span class="s1">mainPanel</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+
+        <span class="s5">// Obsługa wysyłania</span>
+        <span class="s1">sendButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s1">e -&gt; sendAnswer</span><span class="s2">());</span>
+        <span class="s5">// Obsługa wysyłania klawiszem Enter w polu odpowiedzi</span>
+        <span class="s1">answerField</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s1">e -&gt; sendAnswer</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">sendAnswer</span><span class="s2">() {</span>
+        <span class="s1">String nick </span><span class="s2">= </span><span class="s1">nickField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+        <span class="s1">String answer </span><span class="s2">= </span><span class="s1">answerField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">nick</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">() || </span><span class="s1">answer</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s3">&quot;Wypełnij pola Nick oraz Answer!&quot;</span><span class="s2">, </span><span class="s3">&quot;Błąd&quot;</span><span class="s2">, </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">WARNING_MESSAGE</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">try </span><span class="s2">(</span><span class="s1">Socket socket </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Socket</span><span class="s2">(</span><span class="s1">SERVER_IP</span><span class="s2">, </span><span class="s1">SERVER_PORT</span><span class="s2">);</span>
+             <span class="s1">PrintWriter out </span><span class="s2">= </span><span class="s0">new </span><span class="s1">PrintWriter</span><span class="s2">(</span><span class="s1">socket</span><span class="s2">.</span><span class="s1">getOutputStream</span><span class="s2">(), </span><span class="s0">true</span><span class="s2">, </span><span class="s1">StandardCharsets</span><span class="s2">.</span><span class="s1">UTF_8</span><span class="s2">)) {</span>
+
+            <span class="s5">// Format wysyłany do serwera: Nick|Odpowiedź</span>
+            <span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">nick </span><span class="s2">+ </span><span class="s3">&quot;|&quot; </span><span class="s2">+ </span><span class="s1">answer</span><span class="s2">);</span>
+
+            <span class="s5">// Czyszczenie pola odpowiedzi po wysłaniu</span>
+            <span class="s1">answerField</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+            <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s3">&quot;Nie można połączyć z serwerem. Upewnij się, że serwer działa.&quot;</span><span class="s2">, </span><span class="s3">&quot;Błąd Połączenia&quot;</span><span class="s2">, </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">ERROR_MESSAGE</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">SwingUtilities</span><span class="s2">.</span><span class="s1">invokeLater</span><span class="s2">(() </span><span class="s1">-&gt; </span><span class="s0">new </span><span class="s1">QuizClient</span><span class="s2">().</span><span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">));</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>
