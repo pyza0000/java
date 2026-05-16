@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="620" prefWidth="520" spacing="10" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab4.HelloController">
+
+    <padding>
+        <Insets bottom="15" left="15" right="15" top="15" />
+    </padding>
+
+    <HBox spacing="10">
+        <TextField fx:id="classNameField" promptText="np. application.Song" HBox.hgrow="ALWAYS" />
+        <Button onAction="#createObject" text="Create Object" />
+        <Button onAction="#saveChanges" text="Save Changes" />
+    </HBox>
+
+    <ScrollPane fitToWidth="true" prefHeight="330">
+        <VBox fx:id="propertiesBox" spacing="8" />
+    </ScrollPane>
+
+    <TextArea fx:id="consoleArea" editable="false" prefHeight="87.0" prefWidth="489.0" promptText="Konsola aplikacji" />
+</VBox>

@@ -15,13 +15,12 @@ public class QuizClient extends JFrame {
     private JButton sendButton;
 
     public QuizClient() {
-        // Konfiguracja okna (Swing)
+
         setTitle("CLIENT");
         setSize(350, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Panel formularza
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -48,9 +47,9 @@ public class QuizClient extends JFrame {
 
         add(mainPanel, BorderLayout.CENTER);
 
-        // Obsługa wysyłania
+
         sendButton.addActionListener(e -> sendAnswer());
-        // Obsługa wysyłania klawiszem Enter w polu odpowiedzi
+
         answerField.addActionListener(e -> sendAnswer());
     }
 
@@ -66,10 +65,10 @@ public class QuizClient extends JFrame {
         try (Socket socket = new Socket(SERVER_IP, SERVER_PORT);
              PrintWriter out = new PrintWriter(socket.getOutputStream(), true, StandardCharsets.UTF_8)) {
 
-            // Format wysyłany do serwera: Nick|Odpowiedź
+
             out.println(nick + "|" + answer);
 
-            // Czyszczenie pola odpowiedzi po wysłaniu
+
             answerField.setText("");
 
         } catch (Exception ex) {

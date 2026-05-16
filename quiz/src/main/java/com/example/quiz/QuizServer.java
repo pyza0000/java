@@ -15,7 +15,6 @@ public class QuizServer extends JFrame {
     private int currentQuestionIndex = 0;
     private volatile boolean gameOver = false;
 
-    // Zmiana na kolejkę Produktów
     private BlockingQueue<Produkt> kolejka = new LinkedBlockingQueue<>();
 
     public QuizServer() {
@@ -32,7 +31,6 @@ public class QuizServer extends JFrame {
 
         if (!questions.isEmpty()) {
             showQuestion();
-            // Uruchomienie Producenta i Konsumenta z kolejką Produktów
             new Thread(new Producent(kolejka, 5000, this)).start();
             new Thread(new Konsument(kolejka, this)).start();
         }

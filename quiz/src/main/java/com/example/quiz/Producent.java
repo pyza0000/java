@@ -31,7 +31,6 @@ public class Producent implements Runnable {
                 if (line != null && !server.isGameOver()) {
                     String[] parts = line.split("\\|");
                     if (parts.length == 2) {
-                        // Tworzymy "Produkt" i wstawiamy do kolejki
                         Produkt produkt = new Produkt(parts[0], parts[1], ipAddress);
                         kolejka.put(produkt);
                     }

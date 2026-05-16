@@ -15,22 +15,28 @@ public class Konsument implements Runnable {
     public void run() {
         try {
             while (!server.isGameOver()) {
-                // Pobranie z kolejki (blokuje wątek aż pojawi się Produkt)
+
                 Produkt produkt = kolejka.take();
 
                 if (server.isGameOver()) break;
 
                 Question currentQ = server.getCurrentQuestion();
-
                 if (currentQ.answer.equalsIgnoreCase(produkt.getAnswer().trim())) {
-                    // Logika poprawnej odpowiedzi
+
                     server.appendToDisplay(produkt.getNick() + " (" + produkt.getIp() + ") odpowiedział poprawnie :)\n");
 
-                    kolejka.clear(); // Czyścimy kolejkę z nieaktualnych odpowiedzi
+                    kolejka.clear();
+
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
 
                     server.nextQuestion();
+
                 } else {
-                    // Logika błędnej odpowiedzi
+
                     server.appendToDisplay("Nadeszła odpowiedź błędna :(\n");
                 }
             }
