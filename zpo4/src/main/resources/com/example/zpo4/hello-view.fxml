@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.zpo4.HelloController"
+      prefWidth="800"
+      prefHeight="600">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <HBox spacing="10">
+
+        <Label text="Class name:"/>
+
+        <TextField fx:id="classNameField"
+                   prefWidth="300"
+                   text="com.example.zpo4.Person"/>
+
+        <Button text="Create Object"
+                onAction="#createObject"/>
+
+        <Button text="Save Changes"
+                onAction="#saveChanges"/>
+
+    </HBox>
+
+    <ScrollPane fitToWidth="true">
+
+        <GridPane fx:id="gridPane"
+                  hgap="10"
+                  vgap="10">
+
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+        </GridPane>
+
+    </ScrollPane>
+
+    <TextArea fx:id="consoleArea"
+              prefHeight="200"/>
+
+</VBox>
